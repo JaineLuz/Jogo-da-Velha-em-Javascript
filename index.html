@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo da Velha</h1>
+        <table class="jogo" border="2">
+            <tr>
+                <td class="quadrado" onclick="jogar(this)" data-i="1"></button></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="2"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="3"></td>
+            </tr>
+
+            <tr>
+                <td class="quadrado" onclick="jogar(this)" data-i="4"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="5"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="6"></td>
+            </tr>
+
+            <tr>
+                <td class="quadrado" onclick="jogar(this)" data-i="7"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="8"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="9"></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <script>
+        var jogador = "x";
+
+        var tabuleiro = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+
+        function jogar(celula) {
+            var linha = celula.parentElement.rowIndex;
+            var coluna = celula.cellIndex;
+
+            if (celula.innerHTML == "") {
+                celula.innerHTML = jogador;
+                tabuleiro[linha][coluna] = jogador;
+
+                if (verificarVencedor(jogador)) {
+                    alert("O jogador " + jogador + " venceu!");
+                    reiniciar();
+                } else {
+                    jogador = (jogador === "x") ? "o" : "x"; // Alternar entre "x" e "o"
+                }
+            }
+        }
+    
+        function verificarVencedor(jogador) {
+            // Verificar linhas
+            for (var i = 0; i < 3; i++) {
+                if (tabuleiro[i][0] == jogador && tabuleiro[i][1] == jogador && tabuleiro[i][2] == jogador) {
+                    return true;
+                }
+            }
+    
+            // Verificar colunas
+            for (var j = 0; j < 3; j++) {
+                if (tabuleiro[0][j] == jogador && tabuleiro[1][j] == jogador && tabuleiro[2][j] == jogador) {
+                    return true;
+                }
+            }
+    
+            // Verificar diagonal principal
+            if (tabuleiro[0][0] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][2] == jogador) {
+                return true;
+            }
+    
+            // Verificar diagonal secundária
+            if (tabuleiro[0][2] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][0] == jogador) {
+                return true;
+            }
+    
+            return false;
+        }
+    
+        function reiniciar() {
+            window.location.reload();
+        }
+    </script>
+    
+</body>
+</html>
