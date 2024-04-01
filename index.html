@@ -12,7 +12,7 @@
         <h1>Jogo da Velha</h1>
         <table class="jogo" border="2">
             <tr>
-                <td class="quadrado" onclick="jogar(this)" data-i="1"></td>
+                <td class="quadrado" onclick="jogar(this)" data-i="1"></button></td>
                 <td class="quadrado" onclick="jogar(this)" data-i="2"></td>
                 <td class="quadrado" onclick="jogar(this)" data-i="3"></td>
             </tr>
@@ -50,13 +50,13 @@
                 tabuleiro[linha][coluna] = jogador;
 
                 if (verificarVencedor(jogador)) {
-                    alert("O jogador " + jogador + " venceu!");
+                    alert("O jogador " + jogador + " é o grande vencedor!");
                     reiniciar();
                 } else if (verificarEmpate()) {
-                    alert("Empate, deu Velha!");
+                    alert("Empate! O jogo ficou empatado, nenhum vencedor dessa vez.");
                     reiniciar();
                 } else {
-                    jogador = (jogador === "x") ? "o" : "x"; // Alternar entre "x" e "o"
+                    jogador = (jogador === "x") ? "o" : "x"; // Alternar entre "X" e "O"
                 }
             }
         }
@@ -100,7 +100,7 @@
             // Se todas as células estiverem preenchidas e não houver vencedor, então é um empate
             return true;
         }
-        
+    
         function reiniciar() {
             window.location.reload();
         }
