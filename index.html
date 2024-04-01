@@ -52,6 +52,9 @@
                 if (verificarVencedor(jogador)) {
                     alert("O jogador " + jogador + " venceu!");
                     reiniciar();
+                } else if (verificarEmpate()) {
+                    alert("Empate, deu Velha!");
+                    reiniciar();
                 } else {
                     jogador = (jogador === "x") ? "o" : "x"; // Alternar entre "x" e "o"
                 }
@@ -85,7 +88,19 @@
     
             return false;
         }
-    
+
+        function verificarEmpate() {
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    if (tabuleiro[i][j] == "") {
+                        return false; // Ainda há células vazias, o jogo não está empatado
+                    }
+                }
+            }
+            // Se todas as células estiverem preenchidas e não houver vencedor, então é um empate
+            return true;
+        }
+        
         function reiniciar() {
             window.location.reload();
         }
